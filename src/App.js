@@ -1,23 +1,41 @@
-import logo from './logo.svg';
+
+import { Switch,Route } from 'react-router-dom/cjs/react-router-dom.min';
 import './App.css';
+import Base from './Base';
+import Students from './Components/Students';
+import AddStudents from './Components/AddStudents';
+import UpdateStudents from './Components/UpdateStudents';
+import { useState } from 'react';
+import data from './Data/data';
+
 
 function App() {
+  const[students, setStudents]=useState(data);
+  const[editIdx,setEditIdx]=useState();
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Switch>
+        <Route exact path="/">
+          <Students
+          students={students}
+          setStudents={setStudents}
+          />
+        </Route>
+        <Route path="/add">
+          <AddStudents
+          students={students}
+          setStudents={setStudents}
+          />
+        </Route>
+        <Route path="/edit">
+          <UpdateStudents
+          students={students}
+          setStudents={setStudents}
+          editIdx={editIdx}
+          />
+        </Route>
+      </Switch>
+     
     </div>
   );
 }
