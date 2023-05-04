@@ -1,39 +1,45 @@
 const data = [
   {
-    "name": "Prabhu",
-    "gender": "male",
-    "batch": "B45WD",
-    "qualification": "BBA"
+    name: "Prabhu",
+    gender: "male",
+    batch: "B45WD",
+    qualification: "BBA",
+    id:"0",
   },
   {
-    "name": "RajeshKumar",
-    "gender": "male",
-    "batch": "B45WD",
-    "qualification": "BSC"
+    name: "RajeshKumar",
+    gender: "male",
+    batch: "B45WD",
+    qualification: "BSC",
+    id:"1",
   },
   {
-    "name": "Anitha",
+    name: "Anitha",
+    gender: "female",
+    batch: "B45WD",
+    qualification: "BSC",
+    id:"2",
+  },
+  {
+    name: "Abdulwasim",
+    gender: "male",
+    batch: "B45WD",
+    qualification: "B.E-Mech",
+    id:"3",
+  },
+  {
+    name: "Anirutha",
     "gender": "female",
     "batch": "B45WD",
-    "qualification": "BSC"
+    "qualification": "BCA",
+    id:"4",
   },
   {
-    "name": "Abdulwasim",
-    "gender": "male",
-    "batch": "B45WD",
-    "qualification": "B.E-Mech"
-  },
-  {
-    "name": "Anirutha",
-    "gender": "female",
-    "batch": "B45WD",
-    "qualification": "BCA"
-  },
-  {
-    "name": "Kavin",
-    "gender": "male",
-    "batch": "B45WD",
-    "qualification": "B.E-Mech"
+    name: "Kavin",
+    gender: "male",
+    batch: "B45WD",
+    qualification: "B.E-Mech",
+    id:"5",
   }
 ]
 

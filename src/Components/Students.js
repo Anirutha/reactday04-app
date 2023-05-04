@@ -8,19 +8,14 @@ import { useHistory } from 'react-router-dom';
 function Students({students, setStudents}) {
    const history = useHistory();
     // delete functionality
-    const deleteStudent = async (studId)=>{
+    const deleteStudent =  (studId)=>{
       
-      const response = await fetch(`https://6427aa3446fd35eb7c437e60.mockapi.io/students/${studId}`, {
-         method:"DELETE",
-      });
-
-      const data = await response.json()
-     if(data){
+      
        const remainingStudents = 
        students.filter((stud, idx)=> stud.id !== studId)
        setStudents(remainingStudents)
      }
-    }
+    
 
   
   return (

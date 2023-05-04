@@ -4,18 +4,17 @@ import { useHistory } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 
- //Function
 
-function AddStudents({students, setStudents}) {
-  const history = useHistory()
+function AddTeachers({teachers,setTeachers}){
+    const history = useHistory()
     const [name, setName] = useState("")
     const [batch, setBatch] = useState("")
     const [gender, setGender] = useState("")
     const [qualification, setQualification] = useState("")
 
-const createStudent =  () =>{
+const createTeachers =  () =>{
     // creating object from input states
-    const newStudents = {
+    const newTeachers = {
       name:name,
       batch:batch,
       qualification:qualification,
@@ -23,14 +22,13 @@ const createStudent =  () =>{
 }
 
 
-  setStudents([...students, newStudents])
-  history.push("/students")
+  setTeachers([...teachers, newTeachers])
+  history.push("/teachers")
 }
-
-  return (
+  return(
     <Base
-    title={"Add New Student"}
-    description={"We can able to add new students data here"}
+    title={"Add New Teacher"}
+    description={"We can able to add new teacher data here"}
     >
     <div>
         <input
@@ -61,11 +59,10 @@ const createStudent =  () =>{
         />
 
         <Button variant='primary'
-        onClick={createStudent}
-        >Add Students</Button>
+        onClick={createTeachers}
+        >Add Teachers</Button>
     </div>
     </Base>
-  )
+    )
 }
-
-export default AddStudents
+export default AddTeachers

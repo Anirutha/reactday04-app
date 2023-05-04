@@ -1,33 +1,24 @@
 import { Switch,Route } from 'react-router-dom';
 import './App.css';
-
+import data from './Data/data';
 import Students from './Components/Students.js';
 import AddStudents from './Components/AddStudents';
 import UpdateStudents from './Components/UpdateStudents';
-
-import { useEffect, useState } from 'react';
+import {useState } from 'react';
 import Nopage from './Components/Nopage';
 import DashBoard from './Components/Dashboard';
 import { Redirect } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Teachers from './Components/Teachers';
+import AddTeachers from './Components/AddTeachers';
+import UpdateTeachers from './Components/UpdateTeachers';
+import datas from './Data/datas';
 
 function App() {
-  const [students, setStudents] = useState([]);
-
-  useEffect(()=>{
-    const getStudents = async () =>{
-        const response = await fetch("https://6427aa3446fd35eb7c437e60.mockapi.io/students", {
-          method:"GET",
-        }); 
-        const data = await response.json();
-        if(data){
-          setStudents(data)
-        }
-    }
-    getStudents();
-  }, [])
-
-  return (
+  const [students, setStudents] = useState(data);
+  const [teachers,setTeachers]=useState(datas);
+  
+return (
     <div className="App">
        <Switch>
         {/* Exact path first page to load */}
@@ -60,6 +51,27 @@ function App() {
             />
          </Route>
 
+         <Route path="/teachers">
+            <Teachers
+            teachers = {teachers}
+            setTeachers ={setTeachers}
+            />
+          </Route>
+
+          <Route path="/addteachers">
+            <AddTeachers
+            teachers = {teachers}
+            setTeachers ={setTeachers}
+            />
+          </Route>
+
+          <Route path="/updateteachers/:id">
+            <UpdateTeachers
+            teachers = {teachers}
+            setTeachers ={setTeachers}
+            />
+          </Route>
+          
           <Route path="**">
               <Nopage/>
           </Route>

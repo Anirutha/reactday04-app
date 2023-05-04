@@ -20,6 +20,17 @@ const Base = ({title, description, children}) => {
       onClick={()=>history.push("/add")}
       >Add-student</Button>
 
+      <Button variant="primary"
+      onClick={()=>history.push("/teachers")}
+      >Teacher-List</Button>
+
+      <Button variant="primary"
+      onClick={()=>history.push("/addteachers")}
+      >Add-Teacher</Button>
+
+
+
+
          <header>
             <h1 className='heading'>{title}</h1>
          </header>

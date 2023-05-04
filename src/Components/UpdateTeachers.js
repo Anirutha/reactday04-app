@@ -4,10 +4,9 @@ import Base from '../Base/Base';
 import { useHistory } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
-//function
-function UpdateStudents({students, setStudents}) {
+function UpdateTeachers({teachers,setTeachers}){
     const {id} = useParams();
-     const editStudent = students[id]
+    const editTeachers = teachers[id]
     const [name, setName] = useState("")
     const [batch, setBatch] = useState("")
     const [gender, setGender] = useState("")
@@ -15,13 +14,13 @@ function UpdateStudents({students, setStudents}) {
     const history = useHistory();
 
     useEffect(()=>{
-       setName(editStudent.name)
-       setBatch(editStudent.batch)
-       setGender(editStudent.gender)
-       setQualification(editStudent.qualification)
-    }, [editStudent])
+       setName(editTeachers.name)
+       setBatch(editTeachers.batch)
+       setGender(editTeachers.gender)
+       setQualification(editTeachers.qualification)
+    }, [editTeachers])
 
-    function updateStudent (){
+    function updateTeachers (){
          const updatedObject = {
             name : name,
             batch : batch,
@@ -30,16 +29,16 @@ function UpdateStudents({students, setStudents}) {
          }
      
          console.log(updatedObject)
-         students[id] = updatedObject
-         setStudents([...students])
-         history.push("/students")
+         teachers[id] = updatedObject
+         setTeachers([...teachers])
+         history.push("/teachers")
      }
     
-
-  return (
-    <Base
-    title={"Edit a Student"}
-    description={"Edit Stuudents data here"}
+    
+    return(
+        <Base
+    title={"Edit a Teacher"}
+    description={"Edit Teachers data here"}
     >
     <div>
     <input
@@ -70,11 +69,10 @@ function UpdateStudents({students, setStudents}) {
     />
 
     <Button variant='primary'
-    onClick={updateStudent}
+    onClick={updateTeachers}
     >Update Students</Button>
 </div>
 </Base>
-  )
+    )
 }
-
-export default UpdateStudents
+export default UpdateTeachers
