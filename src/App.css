@@ -1,6 +1,7 @@
 *{
   padding: 0px;
   margin: 0px;
+  
 }
  
 .main-component{
@@ -22,11 +23,12 @@
 }
  
 .card{
+  
   display: flex;
   flex-direction: column;
   gap :2rem;
  align-content: space-around;
-  border : 1px solid red;
+  border : 1px solid black;
   width : 200px;
   height: 200px;
   margin : 12px;

@@ -1,66 +1,89 @@
-import React, { useState , useEffect } from "react";
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import Base from '../Base/Base';
+import { useHistory } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from 'react-bootstrap/Button';
+//function
+function UpdateStudents({students, setStudents}) {
+    const {id} = useParams();
+     const editStudent = students[id]
+    const [name, setName] = useState("")
+    const [batch, setBatch] = useState("")
+    const [gender, setGender] = useState("")
+    const [qualification, setQualification] = useState("")
+    const history = useHistory();
 
-function UpdateStudents({students,setStudents,editIdx}){
-    
-    const editStudent=students[editIdx]
-    const[name,setName]=useState("")
-    const[batch,setBatch]=useState("")
-    const[gender,setGender]=useState("")
-    const[qualification,setQualification]=useState("")
+    useEffect(()=>{
+       setName(editStudent.name)
+       setBatch(editStudent.batch)
+       setGender(editStudent.gender)
+       setQualification(editStudent.qualification)
+    }, [editStudent])
 
-     useEffect=(()=>{
-            
-            setName(editStudent.name)
-            setBatch(editStudent.batch)
-            setGender(editStudent.gender)
-            setQualification(editStudent.qualification)
-        },[editStudent])
-      
-     function updatestudent (){
-        const updatedObject={
-            name:name,
-            batch:batch,
-            gender:gender,
-            qualification:qualification
-        }
-        console.log(updatedObject)
-        students[editIdx]=updatedObject
-        setStudents([...students])
-        //console.log(editIdx);
+    async function updateStudent (){
+         const updatedObject = {
+            name : name,
+            batch : batch,
+            gender: gender,
+            qualification :qualification
+         }
+     const response = await fetch(`https://6427aa3446fd35eb7c437e60.mockapi.io/students/${editStudent.id}`, {
+      method:"PUT",
+      body:JSON.stringify(updatedObject),
+      headers:{
+        "Content-Type":"application/json"
+      }
+     })
+
+     const data = await response.json()
+     if(data){
+         console.log(updatedObject)
+         students[id] = updatedObject
+         setStudents([...students])
+         history.push("/students")
      }
+    }
 
-    return(
-        <div>
-        <input
-        placeholder="Enter Name"
-        type="text"
-        value={name}
-        onChange={(e)=>setName(e.target.value)}
-        />
-        <input
-        placeholder="Enter Batch"
-        type="text"
-        value={batch}
-        onChange={(e)=>setBatch(e.target.value)}
-        />
-        <input
-        placeholder="Enter Gender"
-        type="text"
-        value={gender}
-        onChange={(e)=>setGender(e.target.value)}
-        />
-        <input
-        placeholder="Enter Qualification"
-        type="text"
-        value={qualification}
-        onChange={(e)=>setQualification(e.target.value)}
-        />
-        
-        <button
-        onClick={updatestudent}>Update Student</button>
+  return (
+    <Base
+    title={"Edit a Student"}
+    description={"Edit Stuudents data here"}
+    >
+    <div>
+    <input
+    placeholder='Enter Name'
+    type ="text"
+    value = {name}
+    onChange={(e)=>setName(e.target.value)}
+    />
+    <input
+    placeholder='Enter Batch'
+    type ="text"
+    value ={batch}
+    onChange={(e)=>setBatch(e.target.value)}
+    />
 
+    <input
+    placeholder='Enter Gender'
+    type ="text"  
+    value ={gender}
+    onChange={(e)=>setGender(e.target.value)}
+    />
 
-    </div>
-    )
+    <input
+    placeholder='Enter Qualification'
+    type ="text" 
+    value= {qualification}
+    onChange={(e)=>setQualification(e.target.value)}
+    />
+
+    <Button variant='primary'
+    onClick={updateStudent}
+    >Update Students</Button>
+</div>
+</Base>
+  )
 }
+
 export default UpdateStudents

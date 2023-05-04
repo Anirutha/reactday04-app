@@ -1,62 +1,62 @@
-import React, { useState } from "react";
-import Base from "../Base";
-import data from "../Data/data";
-import AddStudents from "./AddStudents";
-import UpdateStudents from "./UpdateStudents";
+import Base from '../Base/Base'
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-function Students(){
-    const[students, setStudents]=useState(data);
-    const[editIdx,setEditIdx]=useState();
-    //delete Functionality
-    const deleteStudent=(studId)=>{
-        const remainingStudents=students.filter((stud,idx)=>idx!==studId)
-        setStudents(remainingStudents)
+import { useHistory } from 'react-router-dom';
+//function
+function Students({students, setStudents}) {
+   const history = useHistory();
+    // delete functionality
+    const deleteStudent = async (studId)=>{
+      
+      const response = await fetch(`https://6427aa3446fd35eb7c437e60.mockapi.io/students/${studId}`, {
+         method:"DELETE",
+      });
+
+      const data = await response.json()
+     if(data){
+       const remainingStudents = 
+       students.filter((stud, idx)=> stud.id !== studId)
+       setStudents(remainingStudents)
+     }
     }
 
-    <UpdateStudents
-          students={students}
-          setStudents={setStudents}
-          editIdx={editIdx}
-          />
-          
-    return(
-        <Base
-        title={"Students Dashboard"}
-        description={"The page contains all students data"}
-        >
-        
-            
-        <div className="card-container">
-            {students.map((stud,idx)=>(
-                <div className="card" key={idx}>
-                  <div className="content">
+  
+  return (
+    <Base 
+    title={"Students Dashboard"}
+    description={"The page contains all students data"}
+    >
 
-                    <h3>{stud.name}</h3>
-                    <p>{stud.batch}</p>
-                    <p>{stud.gender}</p>
-                    <p>{stud.qualification}</p>
-                     </div>
+         <div className='card-container'>
+            {students.map((stud, idx)=>(
+                     <div key={idx}>
+                     <div className='content'>
+                     <Card style={{ width: '18rem' }}>
+                      <Card.Body>
+                      <Card.Text>
+                      <h3>{stud.name}</h3>
+                     <p>{stud.batch}</p>
+                     <p>{stud.gender}</p>
+                     <p>{stud.qualification}</p>
+                     </Card.Text>
+                     <Button variant="primary" onClick={()=>history.push(`/edit/${stud.id}`)}>edit</Button> {" "}
+                     <Button variant="primary" onClick={()=>deleteStudent(stud.id)}>delete</Button>
+                     </Card.Body>
+                     </Card>
+                     </div> 
+                     
 
-                  <div className="control">
-
-                    <button onClick={()=>setEditIdx(idx)}>Edit</button> {" "}
-                    <button onClick={()=>deleteStudent(idx)}>Delete</button>
+                     
+                     
+                     
                     </div>
+            ))}
+     </div>
 
-
-                </div>
-            )
-            
-            
-            
-            
-            )}
-            <div>
-
-            </div>
-        </div>
-        
-        </Base>
-    )
+    </Base>
+  )
 }
+
 export default Students
